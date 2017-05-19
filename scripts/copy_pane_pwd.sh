@@ -16,7 +16,7 @@ display_notice() {
 
 main() {
     local copy_command
-    copy_command="$(clipboard_copy_command)"
+    copy_command="tmux load-buffer -"
     # $copy_command below should not be quoted
     pane_current_path | tr -d '\n' | $copy_command
     display_notice
