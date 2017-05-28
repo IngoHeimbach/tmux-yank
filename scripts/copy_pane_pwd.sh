@@ -11,7 +11,7 @@ pane_current_path() {
 }
 
 display_notice() {
-    display_message 'PWD copied to clipboard!'
+    display_message 'PWD copied to tmux paste buffer!'
 }
 
 main() {
