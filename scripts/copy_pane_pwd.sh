@@ -11,14 +11,23 @@ pane_current_path() {
 }
 
 display_notice() {
-    display_message 'PWD copied to tmux paste buffer!'
+    if [[ "${1}" = "pastebuffer" ]]; then
+        display_message 'PWD copied to tmux paste buffer!'
+    else
+        display_message 'PWD copied to clipboard!'
+    fi
 }
 
 main() {
     local copy_command
-    copy_command="tmux load-buffer -"
+
+    if [[ "${1}" = "pastebuffer" ]]; then
+        copy_command="$(tmux_copy_command)"
+    else
+        copy_command="$(clipboard_copy_command)"
+    fi
     # $copy_command below should not be quoted
     pane_current_path | tr -d '\n' | $copy_command
-    display_notice
+    display_notice "${1}"
 }
-main
+main "$@"

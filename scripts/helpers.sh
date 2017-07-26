@@ -6,6 +6,9 @@ yank_line_option="@yank_line"
 yank_pane_pwd="Y"
 yank_pane_pwd_option="@yank_pane_pwd"
 
+yank_pane_pwd_to_tmux_pastebuffer="P"
+yank_pane_pwd_to_tmux_pastebuffer_option="@yank_pane_pwd_to_tmux_pastebuffer"
+
 yank_default="y"
 yank_option="@copy_mode_yank"
 
@@ -46,6 +49,10 @@ yank_line_key() {
 
 yank_pane_pwd_key() {
     get_tmux_option "$yank_pane_pwd_option" "$yank_pane_pwd"
+}
+
+yank_pane_pwd_to_tmux_pastebuffer_key() {
+    get_tmux_option "$yank_pane_pwd_to_tmux_pastebuffer_option" "$yank_pane_pwd_to_tmux_pastebuffer"
 }
 
 yank_key() {
@@ -131,6 +138,10 @@ clipboard_copy_command() {
     elif [ -n "$(custom_copy_command)" ]; then
         custom_copy_command
     fi
+}
+
+tmux_copy_command() {
+    echo "tmux load-buffer -"
 }
 
 # Cache the TMUX version for speed.

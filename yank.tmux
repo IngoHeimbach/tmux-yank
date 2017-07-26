@@ -54,11 +54,16 @@ set_normal_bindings() {
     tmux bind-key "$(yank_pane_pwd_key)" run-shell -b "$SCRIPTS_DIR/copy_pane_pwd.sh"
 }
 
+set_normal_tmux_bindings() {
+    tmux bind-key "$(yank_pane_pwd_to_tmux_pastebuffer_key)" run-shell -b "$SCRIPTS_DIR/copy_pane_pwd.sh pastebuffer"
+}
+
 main() {
     local copy_command
     copy_command="$(clipboard_copy_command)"
-    set_normal_bindings
+    set_normal_tmux_bindings
     error_handling_if_command_not_present "$copy_command"
     set_copy_mode_bindings "$copy_command"
+    set_normal_bindings
 }
 main
