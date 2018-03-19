@@ -32,13 +32,15 @@ error_handling_if_command_not_present() {
 set_copy_mode_bindings() {
     local copy_command="$1"
     if tmux_is_at_least 2.4; then
-        tmux bind-key -T copy-mode-vi "$(yank_key)"            send-keys -X copy-pipe-and-cancel "$copy_command"
-        tmux bind-key -T copy-mode-vi "$(put_key)"             send-keys -X copy-pipe-and-cancel "tmux paste-buffer"
-        tmux bind-key -T copy-mode-vi "$(yank_put_key)"        send-keys -X copy-pipe-and-cancel "$copy_command; tmux paste-buffer"
+        tmux bind-key -T copy-mode-vi "$(yank_key)"            send-keys -X "$(yank_action)"     "$copy_command"
+        tmux bind-key -T copy-mode-vi "$(put_key)"             send-keys -X "$(yank_action)" "tmux paste-buffer"
+        tmux bind-key -T copy-mode-vi "$(yank_put_key)"        send-keys -X "$(yank_action)" "$copy_command; tmux paste-buffer"
+        tmux bind-key -T copy-mode-vi "$(yank_wo_newline_key)" send-keys -X "$(yank_action)"     "$copy_wo_newline_command"
 
-        tmux bind-key -T copy-mode    "$(yank_key)"            send-keys -X copy-pipe-and-cancel "$copy_command"
-        tmux bind-key -T copy-mode    "$(put_key)"             send-keys -X copy-pipe-and-cancel "tmux paste-buffer"
-        tmux bind-key -T copy-mode    "$(yank_put_key)"        send-keys -X copy-pipe-and-cancel "$copy_command; tmux paste-buffer"
+        tmux bind-key -T copy-mode    "$(yank_key)"            send-keys -X "$(yank_action)"     "$copy_command"
+        tmux bind-key -T copy-mode    "$(put_key)"             send-keys -X "$(yank_action)" "tmux paste-buffer"
+        tmux bind-key -T copy-mode    "$(yank_put_key)"        send-keys -X "$(yank_action)" "$copy_command; tmux paste-buffer"
+        tmux bind-key -T copy-mode    "$(yank_wo_newline_key)" send-keys -X "$(yank_action)"     "$copy_wo_newline_command"
     else
         tmux bind-key -t vi-copy      "$(yank_key)"            copy-pipe "$copy_command"
         tmux bind-key -t vi-copy      "$(put_key)"             copy-pipe "tmux paste-buffer"

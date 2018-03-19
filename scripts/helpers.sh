@@ -21,6 +21,9 @@ yank_put_option="@copy_mode_yank_put"
 yank_selection_default="clipboard"
 yank_selection_option="@yank_selection"
 
+yank_action_default="copy-pipe-and-cancel"
+yank_action_option="@yank_action"
+
 shell_mode_default="emacs"
 shell_mode_option="@shell_mode"
 
@@ -69,6 +72,10 @@ yank_put_key() {
 
 yank_selection() {
     get_tmux_option "$yank_selection_option" "$yank_selection_default"
+}
+
+yank_action() {
+    get_tmux_option "$yank_action_option" "$yank_action_default"
 }
 
 shell_mode() {
