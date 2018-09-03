@@ -18,6 +18,9 @@ put_option="@copy_mode_put"
 yank_put_default="M-y"
 yank_put_option="@copy_mode_yank_put"
 
+yank_wo_newline_default="!"
+yank_wo_newline_option="@copy_mode_yank_wo_newline"
+
 yank_selection_default="clipboard"
 yank_selection_option="@yank_selection"
 
@@ -68,6 +71,10 @@ put_key() {
 
 yank_put_key() {
     get_tmux_option "$yank_put_option" "$yank_put_default"
+}
+
+yank_wo_newline_key() {
+    get_tmux_option "$yank_wo_newline_option" "$yank_wo_newline_default"
 }
 
 yank_selection() {
