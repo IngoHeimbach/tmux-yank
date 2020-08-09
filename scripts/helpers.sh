@@ -185,7 +185,7 @@ tmux_copy_command() {
 }
 
 # Cache the TMUX version for speed.
-tmux_version="$(tmux -V | cut -d ' ' -f 2)"
+tmux_version="$(tmux -V | cut -d ' ' -f 2 | sed 's/next-//')"
 
 tmux_is_at_least() {
     if [[ $tmux_version == "$1" ]] || [[ $tmux_version == master ]]; then
